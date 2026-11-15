@@ -1,0 +1,30 @@
+# Gradle / Kotlin
+.gradle/
+build/
+.kotlin/
+local.properties
+*.iml
+
+# IDE
+.idea/
+.fleet/
+.vscode/
+
+# Xcode / iOS
+xcuserdata/
+DerivedData/
+*.xcworkspace/xcuserdata/
+iosApp/Pods/
+
+# Android
+captures/
+*.apk
+*.aab
+*.keystore
+*.jks
+
+# OS
+.DS_Store
+
+# Node tooling (markdownlint)
+node_modules/
