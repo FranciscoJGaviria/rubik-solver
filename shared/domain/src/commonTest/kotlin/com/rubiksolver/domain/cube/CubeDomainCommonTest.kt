@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 class CubeDomainCommonTest {
     @Test
-    fun `AC-1_5 scramble and algorithm parsing, notation and inverse round-trip on 2x2 and 3x3`() {
+    fun `AC-1_5 scramble and algorithm parsing notation and inverse round-trip on 2x2 and 3x3`() {
         val scramble = Scramble.parse("R U2 F' L D B2")
         scramble.notation shouldBe "R U2 F' L D B2"
         Scramble.parse("   ").moves shouldBe emptyList()
@@ -69,7 +69,7 @@ class CubeDomainCommonTest {
     }
 
     @Test
-    fun `AC-2_1 to AC-2_3 validator detects count, center and impossible piece errors`() {
+    fun `AC-2_1 to AC-2_3 validator detects count center and impossible piece errors`() {
         val solved3x3 = CubeState.solved(CubeSize.THREE)
 
         val wrongCountState = solved3x3.withSticker(StickerPosition(Face.FRONT, 0, 0), StickerColor.WHITE)
@@ -102,7 +102,7 @@ class CubeDomainCommonTest {
     }
 
     @Test
-    fun `AC-2_4 to AC-2_6 validator detects orientation, parity and solved states`() {
+    fun `AC-2_4 to AC-2_6 validator detects orientation parity and solved states`() {
         val solved2x2 = CubeState.solved(CubeSize.TWO)
         CubeValidator.validate(solved2x2).shouldBeInstanceOf<ValidationResult.AlreadySolved>()
 
