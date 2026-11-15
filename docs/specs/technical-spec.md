@@ -22,7 +22,7 @@
 | CI/CD | GitHub Actions + release-please (Conventional Commits) | — |
 
 **Sole non-Kotlin file (`AGENTS.md` §4):** `iosApp/iosApp/iOSApp.swift`, the minimal Xcode entry point that mounts
-`MainViewController()` from `shared:presentation`.
+`mainViewController()` from `shared:presentation`.
 
 ## 2. Architecture overview (C4 Model & Onion Architecture)
 
