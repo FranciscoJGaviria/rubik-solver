@@ -6,7 +6,7 @@ mode until the app is no longer needed.
 
 ## Status
 
-**Phase 2 — Kotlin Multiplatform Onion Skeleton & CI.**
+**Phase 3 — Cube Domain (2x2 & 3x3), Moves, Notation & Algebraic Validation.**
 
 ## Where to start
 
