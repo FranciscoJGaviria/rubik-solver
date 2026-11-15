@@ -8,7 +8,8 @@
 | Concern | Choice | Fulfils |
 |---|---|---|
 | Language | Kotlin 2.1+ (100% of domain, application, adapters and UI) | NFR-6 |
-| Multiplatform targets | `androidTarget` (API 26+), `iosArm64`, `iosSimulatorArm64` (iOS 16+) | NFR-6 |
+| Multiplatform targets | `androidTarget` (API 26+), `iosArm64`, `iosSimulatorArm64` (iOS 16+), plus `jvm` on `:shared:*` for fast TDD/ATDD and Konsist verification | NFR-6 |
+| Build & local toolchain | Gradle 8.11+ Kotlin DSL with Version Catalog (`gradle/libs.versions.toml`) and `asdf` (`.tool-versions` pinning OpenJDK 21 and Gradle) | — |
 | UI & 3D rendering | Compose Multiplatform + custom pure-Kotlin 3D engine on `Canvas` | FR-3, FR-4, NFR-3 |
 | Concurrency & state | `kotlinx.coroutines` + `StateFlow` / `SharedFlow` (unidirectional data flow) | NFR-3 |
 | Dependency injection | Koin Multiplatform (wired exclusively in the composition root) | — |
@@ -21,7 +22,7 @@
 | CI/CD | GitHub Actions + release-please (Conventional Commits) | — |
 
 **Sole non-Kotlin file (`AGENTS.md` §4):** `iosApp/iosApp/iOSApp.swift`, the minimal Xcode entry point that mounts
-`MainViewController()` from `shared:presentation`.
+`mainViewController()` from `shared:presentation`.
 
 ## 2. Architecture overview (C4 Model & Onion Architecture)
 

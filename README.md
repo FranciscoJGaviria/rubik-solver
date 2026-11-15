@@ -6,7 +6,7 @@ mode until the app is no longer needed.
 
 ## Status
 
-**Phase 1 — Specifications.** No application code yet.
+**Phase 2 — Kotlin Multiplatform Onion Skeleton & CI.**
 
 ## Where to start
 
