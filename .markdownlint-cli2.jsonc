@@ -1,0 +1,12 @@
+{
+  "config": {
+    // Line length is not enforced: specs favour readable prose and wide tables.
+    "MD013": false,
+    // Allow inline HTML line breaks in tables.
+    "MD033": false,
+    // Compact `|---|` table delimiters are fine.
+    "MD060": false
+  },
+  // Temporary plans (deleted before merge) and dependencies are not linted.
+  "ignores": ["docs/specs/wip/**", "node_modules/**"]
+}

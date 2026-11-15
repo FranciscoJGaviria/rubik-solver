@@ -1,0 +1,33 @@
+name: docs
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: "**/*.md"
+
+  no-wip-plans:
+    # Plans in docs/specs/wip/ are temporary and must be deleted before merging (AGENTS.md §1).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fail if wip plans remain
+        run: |
+          leftovers=$(find docs/specs/wip -type f ! -name .gitkeep)
+          if [ -n "$leftovers" ]; then
+            echo "::error::Delete wip plans before merging:"
+            echo "$leftovers"
+            exit 1
+          fi

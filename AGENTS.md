@@ -11,12 +11,30 @@ These rules apply to every contributor, human or AI agent. They are not optional
   The functional spec never names technologies; the technical spec never restates requirements, it references
   their IDs (`FR-x`, `NFR-x`, `AC-x.y`).
 
-## 1. Plan first
+## 1. Change workflow (spec → plan → test → code)
 
-- Never implement a feature without a plan.
-- Plans live in `docs/specs/wip/<feature>.md`, are committed **only** on the feature branch, and **must be deleted**
-  before the branch is merged. CI rejects PRs to `main` that still contain plans.
-- A plan references the requirement IDs it fulfils and lists the acceptance tests it will add.
+Every change follows this exact sequence, in the same short-lived branch and PR:
+
+1. **Classify the change:**
+
+   | Change type | Functional spec (`functional-spec.md`) | Technical spec (`technical-spec.md`) |
+   |---|---|---|
+   | New feature / behaviour change | Add or edit `FR-x.y` / `NFR-x` + Gherkin `AC-x.y` | Update if design or architecture changes |
+   | Architecture / design adjustment | — | Update the affected section + add/update a row in *Decisions* (ADR table) and C4 diagrams if impacted |
+   | Bug fix (spec already correct) | Add a missing `AC-x.y` if the scenario was uncovered | — |
+   | Refactor (no behaviour change) | — | Update only if module/package structure documented in the spec changes |
+
+2. **Update the specs first.**
+   - New requirements take the next sequential ID; IDs are **never** reused or renumbered.
+   - Deprecated requirements are marked `~~FR-x.y~~ (removed)` along with their `AC-x.y`, and the corresponding acceptance tests are deleted.
+3. **Write the temporary plan** in `docs/specs/wip/<feature>.md`:
+   - Committed **only** on the feature branch and **must be deleted** before merging (CI blocks PRs to `main` that contain plans).
+   - Lists the requirement IDs (`FR-x.y`, `NFR-x`, `AC-x.y`) or architectural decisions it fulfils, the acceptance tests it will add/modify, and the implementation steps.
+4. **Get human review** on the spec changes and plan before writing production code, and at the end of each phase.
+5. **Execute with ATDD + TDD** (§2): failing acceptance test → inner TDD loop → green.
+6. **Delete the `wip/` plan** and open/merge the PR with a Conventional Commit title.
+
+If during implementation you discover the spec is incomplete or wrong, **stop**, update the spec first in the same branch, and highlight the spec change in the PR description.
 
 ## 2. Acceptance-first, test-driven (ATDD + TDD)
 
