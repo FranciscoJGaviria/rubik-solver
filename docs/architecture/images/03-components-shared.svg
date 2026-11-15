@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2780" height="1760" viewBox="0 0 2780 1760">
+  <defs>
+    <filter id="c4-shadow" x="-6%" y="-6%" width="114%" height="116%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0F172A" flood-opacity="0.14"/>
+    </filter>
+    <filter id="c4-pill-shadow" x="-8%" y="-8%" width="116%" height="120%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0F172A" flood-opacity="0.10"/>
+    </filter>
+    <marker id="c4-arrow" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 1 1.5 L 11 6 L 1 10.5 z" fill="#52606D"/>
+    </marker>
+    <marker id="c4-arrow-blue" viewBox="0 0 12 12" refX="10.5" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 1 1.5 L 11 6 L 1 10.5 z" fill="#1D4ED8"/>
+    </marker>
+  </defs>
+  <rect width="2780" height="1760" fill="#FFFFFF"/>
+  <g id="c4-header">
+    <text x="50" y="48" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#0F172A">Component Diagram (C4 Level 3) — Shared KMP Onion Architecture &amp; Bounded Contexts</text>
+    <text x="50" y="76" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#475569">Strict inward-only dependencies enforced by Gradle modules and Konsist architecture tests</text>
+    <line x1="50" y1="92" x2="2730" y2="92" stroke="#E2E8F0" stroke-width="1.5"/>
+  </g>
+  <g id="boundary-presentation_layer">
+    <rect x="80.0" y="120.0" width="1250.0" height="360.0" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2.2" stroke-dasharray="9,6"/>
+    <text x="102.0" y="152.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">shared:presentation (Outer Ring — UI &amp; 3D Engine)</text>
+    <text x="102.0" y="171.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#475569">[Gradle Module: Compose Multiplatform]</text>
+  </g>
+  <g id="boundary-infrastructure_layer">
+    <rect x="1450.0" y="120.0" width="1250.0" height="360.0" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2.2" stroke-dasharray="9,6"/>
+    <text x="1472.0" y="152.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">shared:infrastructure (Outer Ring — Adapters)</text>
+    <text x="1472.0" y="171.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#475569">[Gradle Module: SQLDelight, Camera &amp; Table Cache]</text>
+  </g>
+  <g id="boundary-application_layer">
+    <rect x="80.0" y="680.0" width="2620.0" height="350.0" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2.2" stroke-dasharray="9,6"/>
+    <text x="102.0" y="712.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">shared:application (Middle Ring — Use Cases &amp; Ports)</text>
+    <text x="102.0" y="731.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#475569">[Gradle Module: Pure Kotlin + Coroutines]</text>
+  </g>
+  <g id="boundary-domain_layer">
+    <rect x="80.0" y="1240.0" width="2620.0" height="430.0" rx="12" fill="#F8FAFC" stroke="#475569" stroke-width="2.2" stroke-dasharray="9,6"/>
+    <text x="102.0" y="1272.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#1E293B">shared:domain (Inner Core — DDD Bounded Contexts, Zero Dependencies)</text>
+    <text x="102.0" y="1291.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#475569">[Gradle Module: Pure Kotlin stdlib only]</text>
+  </g>
+  <g id="c4-edges">
+    <path id="edge-path-1" d="M 414.0 420.0 L 414.0 581.0 L 420.0 595.0 Q 420.0 595.0 420.0 609.0 L 420.0 770.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="414.0" cy="420.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-2" d="M 1068.0 420.0 L 1068.0 536.0 Q 1068.0 550.0 1082.0 550.0 L 1302.8 550.0 Q 1316.8 550.0 1316.8 564.0 L 1316.8 770.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="1068.0" cy="420.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-3" d="M 1780.0 420.0 L 1780.0 596.0 Q 1780.0 610.0 1766.0 610.0 L 1326.3 610.0 A 9.5 9.5 0 0 1 1307.3 610.0 L 606.8 610.0 Q 592.8 610.0 592.8 624.0 L 592.8 770.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="1780.0" cy="420.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-4" d="M 2354.0 420.0 L 2354.0 581.0 L 2327.0 595.0 Q 2327.0 595.0 2327.0 609.0 L 2327.0 770.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="2354.0" cy="420.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-5" d="M 366.0 970.0 L 366.0 1146.0 L 364.0 1160.0 Q 364.0 1160.0 364.0 1174.0 L 364.0 1350.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="366.0" cy="970.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-6" d="M 582.0 970.0 L 582.0 1066.0 Q 582.0 1080.0 596.0 1080.0 L 1951.0 1080.0 Q 1965.0 1080.0 1965.0 1094.0 L 1965.0 1350.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="582.0" cy="970.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-7" d="M 1279.0 970.0 L 1279.0 1070.5 A 9.5 9.5 0 0 1 1279.0 1089.5 L 1279.0 1126.0 Q 1279.0 1140.0 1265.0 1140.0 L 904.0 1140.0 Q 890.0 1140.0 890.0 1154.0 L 890.0 1350.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="1279.0" cy="970.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-8" d="M 2192.0 970.0 L 2192.0 1126.0 Q 2192.0 1140.0 2178.0 1140.0 L 1974.5 1140.0 A 9.5 9.5 0 0 1 1955.5 1140.0 L 1454.0 1140.0 Q 1440.0 1140.0 1440.0 1154.0 L 1440.0 1350.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="2192.0" cy="970.0" r="3.2" fill="#52606D"/>
+    <path id="edge-path-9" d="M 2408.0 970.0 L 2408.0 1146.0 Q 2408.0 1160.0 2422.0 1160.0 L 2436.0 1160.0 Q 2450.0 1160.0 2450.0 1174.0 L 2450.0 1350.0" fill="none" stroke="#52606D" stroke-width="2.2" stroke-dasharray="7,5" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#c4-arrow)"/>
+    <circle cx="2408.0" cy="970.0" r="3.2" fill="#52606D"/>
+  </g>
+  <g id="c4-edge-labels">
+    <g id="edge-label-1" filter="url(#c4-pill-shadow)">
+      <rect x="324.2" y="556.5" width="191.6" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="420.0" y="574.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Dispatches user intents</text>
+      <text x="420.0" y="590.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Use Case Calls / Flow]</text>
+    </g>
+    <g id="edge-label-2" filter="url(#c4-pill-shadow)">
+      <rect x="1079.8" y="526.5" width="220.4" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="1190.0" y="544.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Observes state &amp; step moves</text>
+      <text x="1190.0" y="560.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[StateFlow&lt;GuideState&gt;]</text>
+    </g>
+    <g id="edge-label-3" filter="url(#c4-pill-shadow)">
+      <rect x="1527.8" y="586.5" width="184.4" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="1620.0" y="604.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Implements CameraPort</text>
+      <text x="1620.0" y="620.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Dependency Inversion]</text>
+    </g>
+    <g id="edge-label-4" filter="url(#c4-pill-shadow)">
+      <rect x="2222.6" y="548.2" width="234.8" height="63.5" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="2340.0" y="565.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Implements Repository &amp; Table</text>
+      <text x="2340.0" y="581.8" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">ports</text>
+      <text x="2340.0" y="597.8" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Dependency Inversion]</text>
+    </g>
+    <g id="edge-label-5" filter="url(#c4-pill-shadow)">
+      <rect x="252.2" y="1116.5" width="227.6" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="366.0" y="1134.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Builds &amp; validates CubeState</text>
+      <text x="366.0" y="1150.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Domain API]</text>
+    </g>
+    <g id="edge-label-6" filter="url(#c4-pill-shadow)">
+      <rect x="1854.8" y="1166.5" width="220.4" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="1965.0" y="1184.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Classifies scanned facelets</text>
+      <text x="1965.0" y="1200.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[ColorClassifier (ACL)]</text>
+    </g>
+    <g id="edge-label-7" filter="url(#c4-pill-shadow)">
+      <rect x="772.6" y="1186.5" width="234.8" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="890.0" y="1204.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Requests Solution(stages)</text>
+      <text x="890.0" y="1220.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Solver.solve(state, method)]</text>
+    </g>
+    <g id="edge-label-8" filter="url(#c4-pill-shadow)">
+      <rect x="1337.0" y="1186.5" width="206.0" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="1440.0" y="1204.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Evaluates hints &amp; mastery</text>
+      <text x="1440.0" y="1220.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Curriculum / HintPolicy]</text>
+    </g>
+    <g id="edge-label-9" filter="url(#c4-pill-shadow)">
+      <rect x="2330.6" y="1116.5" width="198.8" height="47.0" rx="7" fill="#FFFFFF" fill-opacity="0.96" stroke="#CBD5E1" stroke-width="1.2"/>
+      <text x="2430.0" y="1134.0" font-family="Helvetica, Arial, sans-serif" font-size="12" font-weight="bold" fill="#0F172A" text-anchor="middle">Updates profile progress</text>
+      <text x="2430.0" y="1150.0" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#475569" text-anchor="middle">[Profile / SolveRecord]</text>
+    </g>
+  </g>
+  <g id="c4-nodes">
+  <g id="node-ui_screens_vm" filter="url(#c4-shadow)">
+    <rect x="150.0" y="210.0" width="480.0" height="210.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="390.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">Screens &amp; ViewModels</text>
+    <text x="390.0" y="263.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: Compose UI + StateFlow (UDF)]</text>
+    <text x="390.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Input, Scanner, Solve Guide, Tutor Lesson and Profile screens</text>
+    <text x="390.0" y="302.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">with Kid/Adult adaptive presentation.</text>
+  </g>
+  <g id="node-cube_3d_renderer" filter="url(#c4-shadow)">
+    <rect x="780.0" y="210.0" width="480.0" height="210.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="1020.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">Pure-Kotlin 3D Cube Engine</text>
+    <text x="1020.0" y="263.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: Quaternions + Compose Canvas]</text>
+    <text x="1020.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Projects 2x2 (8) and 3x3 (26) cubies in 3D, sorts faces via</text>
+    <text x="1020.0" y="302.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">painter&#x27;s algorithm and animates layer turns at 60 fps.</text>
+  </g>
+  <g id="node-camera_vision_adapter" filter="url(#c4-shadow)">
+    <rect x="1520.0" y="210.0" width="520.0" height="210.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="1780.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">Camera &amp; Color Adapter</text>
+    <text x="1780.0" y="263.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: CameraX / AVFoundation]</text>
+    <text x="1780.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Implements CameraPort; samples 2x2 or 3x3 face grids and converts</text>
+    <text x="1780.0" y="302.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">RGB pixels into CIELAB samples.</text>
+  </g>
+  <g id="node-persistence_adapter" filter="url(#c4-shadow)">
+    <rect x="2120.0" y="210.0" width="520.0" height="210.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="2380.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">SQLDelight &amp; Pruning Adapters</text>
+    <text x="2380.0" y="263.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: SQLDelight + File Cache]</text>
+    <text x="2380.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Implements ProfileRepository, ProgressRepository and PruningTables</text>
+    <text x="2380.0" y="302.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">ports on local device storage.</text>
+  </g>
+  <g id="node-input_use_cases" filter="url(#c4-shadow)">
+    <rect x="150.0" y="770.0" width="540.0" height="200.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="420.0" y="804.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">Cube Input &amp; Scan Use Cases</text>
+    <text x="420.0" y="823.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: ScanFace, EnterCube, ValidateCube]</text>
+    <text x="420.0" y="846.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Coordinates guided face scanning, manual sticker editing, scramble</text>
+    <text x="420.0" y="862.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">parsing and plain-language validation.</text>
+  </g>
+  <g id="node-solve_use_cases" filter="url(#c4-shadow)">
+    <rect x="1090.0" y="770.0" width="540.0" height="200.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="1360.0" y="804.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">Solve Guide Use Cases</text>
+    <text x="1360.0" y="823.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: GenerateSolution, StepGuide, RecoverState]</text>
+    <text x="1360.0" y="846.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Selects method per profile/size, invokes the domain Solver and drives</text>
+    <text x="1360.0" y="862.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">step-by-step playback and recovery.</text>
+  </g>
+  <g id="node-tutor_use_cases" filter="url(#c4-shadow)">
+    <rect x="2030.0" y="770.0" width="540.0" height="200.0" rx="10" fill="#85BBF0" stroke="#5D82A8" stroke-width="2.2"/>
+    <text x="2300.0" y="804.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#0B2545" text-anchor="middle">Tutor &amp; Profile Use Cases</text>
+    <text x="2300.0" y="823.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#1D4E89" text-anchor="middle">[Component: PracticeTechnique, RecordAttempt, Graduate]</text>
+    <text x="2300.0" y="846.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">Generates targeted practice scrambles, fades hints, tracks mastery</text>
+    <text x="2300.0" y="862.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#0B2545" text-anchor="middle">streaks and manages Kid/Adult profiles.</text>
+  </g>
+  <g id="node-bc_cube" filter="url(#c4-shadow)">
+    <rect x="130.0" y="1350.0" width="450.0" height="240.0" rx="10" fill="#6CA6E0" stroke="#3F73A8" stroke-width="2.2"/>
+    <text x="355.0" y="1384.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#081C35" text-anchor="middle">Cube Context (Core)</text>
+    <text x="355.0" y="1403.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#143A66" text-anchor="middle">[Package: domain.cube]</text>
+    <text x="355.0" y="1426.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">CubeState aggregate (2x2/3x3), Move, Algorithm,</text>
+    <text x="355.0" y="1442.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">ColorScheme and solvable-state invariant validator.</text>
+  </g>
+  <g id="node-bc_solving" filter="url(#c4-shadow)">
+    <rect x="650.0" y="1350.0" width="480.0" height="240.0" rx="10" fill="#6CA6E0" stroke="#3F73A8" stroke-width="2.2"/>
+    <text x="890.0" y="1384.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#081C35" text-anchor="middle">Solving Context (Core)</text>
+    <text x="890.0" y="1403.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#143A66" text-anchor="middle">[Package: domain.solving (Strategy Pattern)]</text>
+    <text x="890.0" y="1426.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">Solver domain service dispatching to SolvingStrategy per</text>
+    <text x="890.0" y="1442.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">(CubeSize, Method): LBL, CFOP, Roux, Kociemba, Ortega,</text>
+    <text x="890.0" y="1459.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">Optimal.</text>
+  </g>
+  <g id="node-bc_learning" filter="url(#c4-shadow)">
+    <rect x="1200.0" y="1350.0" width="480.0" height="240.0" rx="10" fill="#6CA6E0" stroke="#3F73A8" stroke-width="2.2"/>
+    <text x="1440.0" y="1384.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#081C35" text-anchor="middle">Learning Context (Core)</text>
+    <text x="1440.0" y="1403.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#143A66" text-anchor="middle">[Package: domain.learning]</text>
+    <text x="1440.0" y="1426.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">Curriculum, Lesson, Technique, HintPolicy (5 levels), Mastery</text>
+    <text x="1440.0" y="1442.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">(5 streak at none) and Graduation rules.</text>
+  </g>
+  <g id="node-bc_recognition" filter="url(#c4-shadow)">
+    <rect x="1750.0" y="1350.0" width="430.0" height="240.0" rx="10" fill="#6CA6E0" stroke="#3F73A8" stroke-width="2.2"/>
+    <text x="1965.0" y="1384.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#081C35" text-anchor="middle">Recognition Context (Supporting)</text>
+    <text x="1965.0" y="1403.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#143A66" text-anchor="middle">[Package: domain.recognition]</text>
+    <text x="1965.0" y="1426.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">FaceScan, ColorSample (CIELAB) and constrained</text>
+    <text x="1965.0" y="1442.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">ColorClassifier anchored on center/reference stickers.</text>
+  </g>
+  <g id="node-bc_profile" filter="url(#c4-shadow)">
+    <rect x="2250.0" y="1350.0" width="400.0" height="240.0" rx="10" fill="#6CA6E0" stroke="#3F73A8" stroke-width="2.2"/>
+    <text x="2450.0" y="1384.0" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="bold" fill="#081C35" text-anchor="middle">Profile Context (Generic)</text>
+    <text x="2450.0" y="1403.0" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#143A66" text-anchor="middle">[Package: domain.profile]</text>
+    <text x="2450.0" y="1426.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">Profile (Kid/Adult), TechniqueProgress,</text>
+    <text x="2450.0" y="1442.5" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">SolveRecord, Settings and adult-check guard</text>
+    <text x="2450.0" y="1459.0" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#081C35" text-anchor="middle">policy.</text>
+  </g>
+  </g>
+  <text x="50" y="1738" font-family="Helvetica, Arial, sans-serif" font-size="12.5" fill="#64748B">C4 Model Notation (Simon Brown - c4model.com) — Onion layers: Presentation &amp; Infrastructure -&gt; Application -&gt; Domain</text>
+</svg>
