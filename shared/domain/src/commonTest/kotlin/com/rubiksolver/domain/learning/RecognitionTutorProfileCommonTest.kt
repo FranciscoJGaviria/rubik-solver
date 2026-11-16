@@ -35,6 +35,9 @@ class RecognitionTutorProfileCommonTest {
         ScanOrientationGuide.nextStepAfter(Face.FRONT).shouldNotBeNull().nextFace shouldBe Face.RIGHT
         ScanOrientationGuide.nextStepAfter(Face.DOWN).shouldBeNull()
         LabColor(50.0, 10.0, 20.0).distanceTo(LabColor(50.0, 10.0, 20.0)) shouldBe 0.0
+        for (color in StickerColor.entries) {
+            ConstrainedColorClassifier.nearestColor(RgbColor.canonicalFor(color).toLab()) shouldBe color
+        }
     }
 
     @Test

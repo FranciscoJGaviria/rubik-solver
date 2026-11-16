@@ -2,6 +2,7 @@ package com.rubiksolver.presentation.cube3d
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.gestures.detectDragGestures
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,48 +27,22 @@ fun Cube3DCanvas(
     viewerState: CubeViewerState,
     onOrbitDrag: (Double, Double) -> Unit,
     onFreePlaySwipe: (StickerPosition, Double, Double) -> Unit,
+    onStickerTap: ((StickerPosition) -> Unit)? = null,
     modifier: Modifier = Modifier,
 ) {
-    var touchedSticker by remember { mutableStateOf<StickerPosition?>(null) }
-    var accumulatedDragX by remember { mutableStateOf(0.0) }
-    var accumulatedDragY by remember { mutableStateOf(0.0) }
     var latestScene by remember { mutableStateOf<ProjectedCubeScene?>(null) }
 
     Canvas(
         modifier =
             modifier
                 .fillMaxSize()
-                .pointerInput(viewerState.freePlayMode, viewerState.cubeState) {
-                    detectDragGestures(
-                        onDragStart = { startOffset ->
-                            accumulatedDragX = 0.0
-                            accumulatedDragY = 0.0
-                            touchedSticker =
-                                latestScene?.let { scene ->
-                                    findNearestQuad(scene, startOffset.x.toDouble(), startOffset.y.toDouble())
-                                }
-                        },
-                        onDrag = { change, dragAmount ->
-                            change.consume()
-                            if (viewerState.freePlayMode && touchedSticker != null) {
-                                accumulatedDragX += dragAmount.x.toDouble()
-                                accumulatedDragY += dragAmount.y.toDouble()
-                            } else {
-                                onOrbitDrag(
-                                    dragAmount.x.toDouble() * ORBIT_SENSITIVITY,
-                                    dragAmount.y.toDouble() * ORBIT_SENSITIVITY,
-                                )
-                            }
-                        },
-                        onDragEnd = {
-                            val startPos = touchedSticker
-                            if (viewerState.freePlayMode && startPos != null) {
-                                onFreePlaySwipe(startPos, accumulatedDragX, accumulatedDragY)
-                            }
-                            touchedSticker = null
-                        },
-                    )
-                },
+                .cube3dTapAndDragGestures(
+                    viewerState = viewerState,
+                    latestSceneProvider = { latestScene },
+                    onOrbitDrag = onOrbitDrag,
+                    onFreePlaySwipe = onFreePlaySwipe,
+                    onStickerTap = onStickerTap,
+                ),
     ) {
         val scene =
             Cube3DProjectionEngine.project(
@@ -81,7 +56,11 @@ fun Cube3DCanvas(
         latestScene = scene
 
         scene.visibleQuads.forEach { quad ->
-            drawStickerQuad(quad)
+            drawStickerQuad(
+                quad = quad,
+                isUnpainted = quad.position in viewerState.unpaintedPositions,
+                isHighlighted = quad.position in viewerState.highlightedPositions,
+            )
         }
         scene.directionArrow?.let { arrow ->
             drawDirectionArrow(arrow)
@@ -89,18 +68,94 @@ fun Cube3DCanvas(
     }
 }
 
-private fun findNearestQuad(
+private fun Modifier.cube3dTapAndDragGestures(
+    viewerState: CubeViewerState,
+    latestSceneProvider: () -> ProjectedCubeScene?,
+    onOrbitDrag: (Double, Double) -> Unit,
+    onFreePlaySwipe: (StickerPosition, Double, Double) -> Unit,
+    onStickerTap: ((StickerPosition) -> Unit)?,
+): Modifier =
+    this
+        .pointerInput(onStickerTap) {
+            if (onStickerTap != null) {
+                detectTapGestures { tapOffset ->
+                    latestSceneProvider()?.let { scene ->
+                        findHitQuad(scene, tapOffset.x.toDouble(), tapOffset.y.toDouble())?.let(onStickerTap)
+                    }
+                }
+            }
+        }.pointerInput(viewerState.freePlayMode, viewerState.cubeState) {
+            var touchedSticker: StickerPosition? = null
+            var accumulatedDragX = 0.0
+            var accumulatedDragY = 0.0
+            detectDragGestures(
+                onDragStart = { startOffset ->
+                    accumulatedDragX = 0.0
+                    accumulatedDragY = 0.0
+                    touchedSticker =
+                        latestSceneProvider()?.let { scene ->
+                            findHitQuad(scene, startOffset.x.toDouble(), startOffset.y.toDouble())
+                        }
+                },
+                onDrag = { change, dragAmount ->
+                    change.consume()
+                    if (viewerState.freePlayMode && touchedSticker != null) {
+                        accumulatedDragX += dragAmount.x.toDouble()
+                        accumulatedDragY += dragAmount.y.toDouble()
+                    } else {
+                        onOrbitDrag(
+                            dragAmount.x.toDouble() * ORBIT_SENSITIVITY,
+                            dragAmount.y.toDouble() * ORBIT_SENSITIVITY,
+                        )
+                    }
+                },
+                onDragEnd = {
+                    val startPos = touchedSticker
+                    if (viewerState.freePlayMode && startPos != null) {
+                        onFreePlaySwipe(startPos, accumulatedDragX, accumulatedDragY)
+                    }
+                    touchedSticker = null
+                },
+            )
+        }
+
+private fun findHitQuad(
     scene: ProjectedCubeScene,
     touchX: Double,
     touchY: Double,
-): StickerPosition? =
-    scene.visibleQuads
-        .asReversed()
-        .minByOrNull { quad ->
-            hypot(quad.center.x - touchX, quad.center.y - touchY)
-        }?.position
+): StickerPosition? {
+    val frontToBack = scene.visibleQuads.asReversed()
+    val exactHit = frontToBack.firstOrNull { quad -> isPointInsideConvexQuad(quad.vertices, touchX, touchY) }
+    if (exactHit != null) return exactHit.position
+    return frontToBack
+        .filter { quad -> hypot(quad.center.x - touchX, quad.center.y - touchY) <= MAX_TAP_FALLBACK_DISTANCE }
+        .minByOrNull { quad -> hypot(quad.center.x - touchX, quad.center.y - touchY) }
+        ?.position
+}
 
-private fun DrawScope.drawStickerQuad(quad: ProjectedQuad2D) {
+private fun isPointInsideConvexQuad(
+    vertices: List<Point2D>,
+    px: Double,
+    py: Double,
+): Boolean {
+    if (vertices.size < 3) return false
+    var positiveCount = 0
+    var negativeCount = 0
+    for (i in vertices.indices) {
+        val a = vertices[i]
+        val b = vertices[(i + 1) % vertices.size]
+        val cross = (b.x - a.x) * (py - a.y) - (b.y - a.y) * (px - a.x)
+        if (cross > 0.0) positiveCount++
+        if (cross < 0.0) negativeCount++
+    }
+    return positiveCount == 0 || negativeCount == 0
+}
+
+private fun DrawScope.drawStickerQuad(
+    quad: ProjectedQuad2D,
+    isUnpainted: Boolean,
+    isHighlighted: Boolean,
+) {
     if (quad.vertices.isEmpty()) return
     val path =
         Path().apply {
@@ -111,11 +166,22 @@ private fun DrawScope.drawStickerQuad(quad: ProjectedQuad2D) {
             }
             close()
         }
-    drawPath(path = path, color = paletteColor(quad.color), style = Fill)
-    drawPath(path = path, color = Color(BORDER_HEX), style = Stroke(width = STICKER_BORDER_WIDTH))
+    val fillColor = if (isUnpainted) Color(UNPAINTED_HEX) else paletteColor(quad.color)
+    drawPath(path = path, color = fillColor, style = Fill)
+    val borderColor = if (isHighlighted) Color(HIGHLIGHT_BORDER_HEX) else Color(BORDER_HEX)
+    val borderWidth = if (isHighlighted) HIGHLIGHT_BORDER_WIDTH else STICKER_BORDER_WIDTH
+    drawPath(path = path, color = borderColor, style = Stroke(width = borderWidth))
 
-    quad.symbol?.let { symbol ->
-        drawColorBlindSymbol(symbol, quad.center)
+    if (isUnpainted) {
+        drawCircle(
+            color = Color(UNPAINTED_DOT_HEX),
+            radius = UNPAINTED_DOT_RADIUS,
+            center = Offset(quad.center.x.toFloat(), quad.center.y.toFloat()),
+        )
+    } else {
+        quad.symbol?.let { symbol ->
+            drawColorBlindSymbol(symbol, quad.center)
+        }
     }
 }
 
@@ -242,13 +308,19 @@ private fun paletteColor(color: StickerColor): Color =
     }
 
 private const val ORBIT_SENSITIVITY: Double = 0.45
+private const val MAX_TAP_FALLBACK_DISTANCE: Double = 42.0
 private const val STICKER_BORDER_WIDTH: Float = 3.5f
+private const val HIGHLIGHT_BORDER_WIDTH: Float = 6.5f
+private const val UNPAINTED_DOT_RADIUS: Float = 4.0f
 private const val SYMBOL_RADIUS_PX: Float = 10f
 private const val SYMBOL_STROKE_WIDTH: Float = 2.6f
 private const val DIAGONAL_FACTOR: Float = 0.7f
 private const val ARROW_STROKE_WIDTH: Float = 5f
 private const val ARROW_TIP_RADIUS: Float = 7f
 private const val BORDER_HEX: Long = 0xFF14181F
+private const val UNPAINTED_HEX: Long = 0xFF334155
+private const val UNPAINTED_DOT_HEX: Long = 0xFF64748B
+private const val HIGHLIGHT_BORDER_HEX: Long = 0xFFFB7185
 private const val SYMBOL_INK_HEX: Long = 0xFF111827
 private const val ARROW_HEX: Long = 0xFF0EA5E9
 private const val WHITE_HEX: Long = 0xFFF8FAFC

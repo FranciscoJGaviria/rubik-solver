@@ -34,6 +34,10 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.koin.core)
         }
+        jvmMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.openpnp.opencv)
+        }
         commonTest.dependencies {
             implementation(kotlin("test"))
             implementation(libs.kotest.framework.engine)
@@ -43,6 +47,12 @@ kotlin {
         jvmTest.dependencies {
             implementation(libs.kotest.runner.junit5)
         }
+    }
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.rubiksolver.presentation.MainKt"
     }
 }
 

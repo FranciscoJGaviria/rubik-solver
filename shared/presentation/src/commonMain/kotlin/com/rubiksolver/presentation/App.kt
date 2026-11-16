@@ -60,7 +60,17 @@ fun App(defaultSize: CubeSize = CubeSize.THREE) {
             }
             when (selectedTab) {
                 0 -> CubeViewerScreen(controller = viewerController, modifier = Modifier.weight(1f))
-                1 -> ManualCubeInputScreen(controller = inputController, modifier = Modifier.weight(1f))
+                1 ->
+                    ManualCubeInputScreen(
+                        controller = inputController,
+                        onOpenSolveGuide = {
+                            inputController.state.value.latestSolution?.let { sol ->
+                                guideController.loadSolution(inputController.state.value.cubeState, sol)
+                                selectedTab = 2
+                            }
+                        },
+                        modifier = Modifier.weight(1f),
+                    )
                 2 ->
                     SolveGuideScreen(
                         controller = guideController,

@@ -8,7 +8,7 @@
 | Concern | Choice | Fulfils |
 |---|---|---|
 | Language | Kotlin 2.1+ (100% of domain, application, adapters and UI) | NFR-6 |
-| Multiplatform targets | `androidTarget` (API 26+), `iosArm64`, `iosSimulatorArm64` (iOS 16+), plus `jvm` on `:shared:*` for fast TDD/ATDD and Konsist verification | NFR-6 |
+| Multiplatform targets | `androidTarget` (API 26+), `iosArm64`, `iosSimulatorArm64` (iOS 16+), plus `jvm` on `:shared:*` for fast TDD/ATDD, Konsist verification, and a Compose Desktop local visual runner (`:shared:presentation:run`) | NFR-6 |
 | Build & local toolchain | Gradle 8.11+ Kotlin DSL with Version Catalog (`gradle/libs.versions.toml`) and `asdf` (`.tool-versions` pinning OpenJDK 21 and Gradle) | — |
 | UI & 3D rendering | Compose Multiplatform + custom pure-Kotlin 3D engine on `Canvas` | FR-3, FR-4, NFR-3 |
 | Concurrency & state | `kotlinx.coroutines` + `StateFlow` / `SharedFlow` (unidirectional data flow) | NFR-3 |
@@ -227,3 +227,4 @@ Located in `:shared:presentation` (`ui.cube3d`), implemented 100% in `commonMain
 | ADR-04 | **SQLDelight for local persistence + binary files for pruning tables** | Room KMP; multiplatform-settings | SQLDelight offers mature KMP support and compile-time verified SQL for relational profile/progress queries (`FR-6`), while raw binary files load ~3.5 MB pruning tables in milliseconds without SQLite overhead (`NFR-3`). |
 | ADR-05 | **CIELAB ($\Delta E_{2000}$) + cardinality-constrained assignment for camera scan** | Raw RGB/HSV thresholds; on-device ML model (TFLite/CoreML) | Anchoring on center stickers in CIELAB with exact sticker-count assignment is deterministic, requires zero ML weights, works under uneven lighting, and runs in < 2 ms per frame (`FR-1.2`, `NFR-3`). |
 | ADR-06 | **Kotest `BehaviorSpec` in `commonTest` for ATDD** | Cucumber-JVM | Runs across all KMP targets (not JVM-only) and maps Gherkin `Given`/`When`/`Then` blocks directly to `AC-x.y` IDs (`AGENTS.md` §2). |
+| ADR-07 | **Compose Desktop (`jvmMain`) visual runner in `:shared:presentation`** | Requiring Android SDK / Xcode simulator for every visual check | Adding `compose.desktop.currentOs` and `Main.kt` in `shared/presentation/src/jvmMain` enables instant native desktop execution (`./gradlew :shared:presentation:run`) of the exact same `App()` UI without duplicating presentation logic. |

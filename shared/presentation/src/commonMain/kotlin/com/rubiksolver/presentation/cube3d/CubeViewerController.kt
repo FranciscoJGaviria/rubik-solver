@@ -15,6 +15,8 @@ data class CubeViewerState(
     val activeAnimation: LayerTurnAnimation? = null,
     val freePlayMode: Boolean = false,
     val colorBlindAssistance: Boolean = false,
+    val unpaintedPositions: Set<StickerPosition> = emptySet(),
+    val highlightedPositions: Set<StickerPosition> = emptySet(),
 )
 
 class CubeViewerController(

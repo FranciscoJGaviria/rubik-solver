@@ -61,6 +61,11 @@ object ConstrainedColorClassifier {
         return CubeState(size = size, stickers = assigned)
     }
 
+    fun nearestColor(sample: LabColor): StickerColor =
+        StickerColor.entries.minBy { color ->
+            sample.distanceTo(RgbColor.canonicalFor(color).toLab())
+        }
+
     private fun resolveAnchors(
         size: CubeSize,
         samples: Map<StickerPosition, LabColor>,
