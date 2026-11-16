@@ -6,7 +6,7 @@ mode until the app is no longer needed.
 
 ## Status
 
-**Phase 6 — Animated Step-by-Step 3D Solve Guide.**
+**Phase 7 & 8 — Complete v1 (Camera Scan, 3D Guide, Strategy Solvers, Tutor & Profiles).**
 
 ## Where to start
 
