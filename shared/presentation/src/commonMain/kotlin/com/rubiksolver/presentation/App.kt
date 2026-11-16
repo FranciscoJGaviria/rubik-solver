@@ -20,6 +20,7 @@ import com.rubiksolver.presentation.guide.SolveGuideController
 import com.rubiksolver.presentation.guide.SolveGuideScreen
 import com.rubiksolver.presentation.input.ManualCubeInputScreen
 import com.rubiksolver.presentation.input.ManualInputController
+import com.rubiksolver.presentation.tutor.TutorAndProfilesScreen
 
 @Composable
 fun App(defaultSize: CubeSize = CubeSize.THREE) {
@@ -51,17 +52,25 @@ fun App(defaultSize: CubeSize = CubeSize.THREE) {
                     },
                     text = { Text("Solve Guide") },
                 )
+                Tab(
+                    selected = selectedTab == TAB_TUTOR_INDEX,
+                    onClick = { selectedTab = TAB_TUTOR_INDEX },
+                    text = { Text("Tutor & Profiles") },
+                )
             }
             when (selectedTab) {
                 0 -> CubeViewerScreen(controller = viewerController, modifier = Modifier.weight(1f))
                 1 -> ManualCubeInputScreen(controller = inputController, modifier = Modifier.weight(1f))
-                else ->
+                2 ->
                     SolveGuideScreen(
                         controller = guideController,
                         onRequestReenterCube = { selectedTab = 1 },
                         modifier = Modifier.weight(1f),
                     )
+                else -> TutorAndProfilesScreen(modifier = Modifier.weight(1f))
             }
         }
     }
 }
+
+private const val TAB_TUTOR_INDEX: Int = 3
