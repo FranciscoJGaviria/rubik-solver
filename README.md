@@ -6,7 +6,7 @@ mode until the app is no longer needed.
 
 ## Status
 
-**Phase 5 — Manual Cube Input & Strategy-Based Solvers (2x2 & 3x3).**
+**Phase 6 — Animated Step-by-Step 3D Solve Guide.**
 
 ## Where to start
 

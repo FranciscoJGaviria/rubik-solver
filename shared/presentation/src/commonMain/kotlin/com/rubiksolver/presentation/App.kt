@@ -16,6 +16,8 @@ import com.rubiksolver.domain.cube.CubeSize
 import com.rubiksolver.domain.cube.CubeState
 import com.rubiksolver.presentation.cube3d.CubeViewerController
 import com.rubiksolver.presentation.cube3d.CubeViewerScreen
+import com.rubiksolver.presentation.guide.SolveGuideController
+import com.rubiksolver.presentation.guide.SolveGuideScreen
 import com.rubiksolver.presentation.input.ManualCubeInputScreen
 import com.rubiksolver.presentation.input.ManualInputController
 
@@ -25,6 +27,7 @@ fun App(defaultSize: CubeSize = CubeSize.THREE) {
         var selectedTab by remember { mutableStateOf(0) }
         val viewerController = remember(defaultSize) { CubeViewerController(CubeState.solved(defaultSize)) }
         val inputController = remember(defaultSize) { ManualInputController(initialSize = defaultSize) }
+        val guideController = remember(defaultSize) { SolveGuideController() }
 
         Column(modifier = Modifier.fillMaxSize()) {
             TabRow(selectedTabIndex = selectedTab) {
@@ -38,11 +41,26 @@ fun App(defaultSize: CubeSize = CubeSize.THREE) {
                     onClick = { selectedTab = 1 },
                     text = { Text("Input & Solve") },
                 )
+                Tab(
+                    selected = selectedTab == 2,
+                    onClick = {
+                        inputController.state.value.latestSolution?.let { sol ->
+                            guideController.loadSolution(inputController.state.value.cubeState, sol)
+                        }
+                        selectedTab = 2
+                    },
+                    text = { Text("Solve Guide") },
+                )
             }
-            if (selectedTab == 0) {
-                CubeViewerScreen(controller = viewerController, modifier = Modifier.weight(1f))
-            } else {
-                ManualCubeInputScreen(controller = inputController, modifier = Modifier.weight(1f))
+            when (selectedTab) {
+                0 -> CubeViewerScreen(controller = viewerController, modifier = Modifier.weight(1f))
+                1 -> ManualCubeInputScreen(controller = inputController, modifier = Modifier.weight(1f))
+                else ->
+                    SolveGuideScreen(
+                        controller = guideController,
+                        onRequestReenterCube = { selectedTab = 1 },
+                        modifier = Modifier.weight(1f),
+                    )
             }
         }
     }
