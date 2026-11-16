@@ -6,7 +6,7 @@ mode until the app is no longer needed.
 
 ## Status
 
-**Phase 3 — Cube Domain (2x2 & 3x3), Moves, Notation & Algebraic Validation.**
+**Phase 4 — Pure-Kotlin 3D Engine & Interactive Cube Viewer.**
 
 ## Where to start
 
