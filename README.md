@@ -6,7 +6,7 @@ mode until the app is no longer needed.
 
 ## Status
 
-**Phase 4 — Pure-Kotlin 3D Engine & Interactive Cube Viewer.**
+**Phase 5 — Manual Cube Input & Strategy-Based Solvers (2x2 & 3x3).**
 
 ## Where to start
 

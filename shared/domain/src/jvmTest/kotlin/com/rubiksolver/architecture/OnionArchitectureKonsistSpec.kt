@@ -3,6 +3,7 @@ package com.rubiksolver.architecture
 import com.lemonappdev.konsist.api.Konsist
 import com.lemonappdev.konsist.api.ext.list.imports
 import com.lemonappdev.konsist.api.ext.list.properties
+import com.lemonappdev.konsist.api.ext.list.withParentInterfaceNamed
 import com.lemonappdev.konsist.api.verify.assertFalse
 import com.lemonappdev.konsist.api.verify.assertTrue
 import io.kotest.core.spec.style.FunSpec
@@ -66,6 +67,16 @@ class OnionArchitectureKonsistSpec :
                 .properties()
                 .assertTrue { property ->
                     property.isVal
+                }
+        }
+
+        test("every SolvingStrategy implementation resides in domain.solving and ends with Strategy") {
+            domainScope
+                .classes()
+                .withParentInterfaceNamed("SolvingStrategy")
+                .assertTrue { clazz ->
+                    clazz.resideInPackage("com.rubiksolver.domain.solving..") &&
+                        clazz.name.endsWith("Strategy")
                 }
         }
     })
